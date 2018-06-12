@@ -1,4 +1,4 @@
-var bcrypt=require("bcrypy-nodejs");
+var bcrypt=require("bcrypt-nodejs");
 var mongoose = require("mongoose");
 
 var SALT_FACTOR = 10;
@@ -19,7 +19,7 @@ zombieSchema.pre("save",(done)=>{
     if(!zomie.isModified("password")){
         return done();
     }
-    bcrypt.genrateSalt(SALT_FACTOR,(err, salt)=>{
+    bcrypt.genSalt(SALT_FACTOR,(err, salt)=>{
         if(err){
             return done(err);
         }
@@ -39,7 +39,7 @@ zombieSchema.methods.checkPassword = (guess, done) => {
     });
 }
 
-zombieSchem.methods.name = () =>{
+zombieSchema.methods.name = function(){
     return this.displayName || this.username;
 }
 var Zombie = mongoose.model("Zombie",zombieSchema);
