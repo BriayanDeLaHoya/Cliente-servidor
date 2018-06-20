@@ -1,12 +1,13 @@
 var express = require("express");
 var Zombie = require("./models/zombie");
-
+var Arma = require("./models/arma");
 var passport = require("passport");
 
 var router = express.Router();
 
 router.use((req,res,next)=>{
     res.locals.currentZombie = req.zombie;
+    /*res.locals.currentArma = req.arma;*/
     res.locals.errors = req.flash("error");
     res.locals.infos = req.flash("info");
     next();
@@ -59,4 +60,38 @@ router.post("/signup",(req,res,next)=>{
             res.render("profile",{zombie: zombie}); 
     });
 });
+
+
+router.get("/armas",(req,res)=>{
+    res.render("armas");
+    
+});
+router.post("/armas",(req,res,next)=>{
+    var descripcion = req.body.descripcion;
+    var fuerza = req.body.fuerza;
+    var categoria = req.body.categoria;
+    var municiones = req.body.municiones;
+
+        var newArma = new Arma({
+            descripcion: descripcion,
+            fuerza: fuerza,
+            categoria: categoria,
+            municiones: municiones
+        });
+        newArma.save(next);
+        return res.redirect("/armas_list");
+    });
+
+    router.get("/armas_list",(req,res,next)=>{
+        Arma.find()
+        .sort({ createdAt: "descending"})
+        .exec((err,armas)=> {
+            if(err){
+                return next(err);
+            }
+            res.render("armas_list",{armas: armas});
+        });  
+    });
 module.exports = router;
+
+    
