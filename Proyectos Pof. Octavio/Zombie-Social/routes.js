@@ -23,6 +23,8 @@ router.get("/",(req,res,next)=>{
         res.render("index",{zombies: zombies});
     });  
 });
+
+
 router.get("/signup",(req,res)=>{
     res.render("signup");
 });
@@ -91,6 +93,20 @@ router.post("/armas",(req,res,next)=>{
             }
             res.render("armas_list",{armas: armas});
         });  
+    });
+
+    router.get("/login", (req, res) => {
+        res.render("login");
+    });
+
+    router.post("/login", passport.authenticate("login",{
+        successRedirect:"/",
+        failureRedirect:"/login",
+        failureRedirect: true
+    }));
+    router.get("/logout", (req, res) =>{
+        req.logout();
+        res.redirect("/");
     });
 module.exports = router;
 
