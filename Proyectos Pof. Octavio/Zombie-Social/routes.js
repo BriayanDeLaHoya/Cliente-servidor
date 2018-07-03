@@ -2,14 +2,14 @@ var express = require("express");
 var Zombie = require("./models/zombie");
 var Arma = require("./models/arma");
 var passport = require("passport");
-
 var router = express.Router();
+
 
 router.use((req,res,next)=>{
     res.locals.currentZombie = req.zombie;
-    /*res.locals.currentArma = req.arma;*/
     res.locals.errors = req.flash("error");
     res.locals.infos = req.flash("info");
+    console.log(req.zombie);
     next();
 });
 
@@ -108,6 +108,32 @@ router.post("/armas",(req,res,next)=>{
         req.logout();
         res.redirect("/");
     });
+
+    router.get("/edit",ensureAuthenticated, (req,res)=>{
+        res.render("edit");
+    });
+
+    router.post("/edit", ensureAuthenticated,(req,res,next)=>{
+        req.zombie.displayName = req.body.displayName;
+        req.zombie.bio = req.body.bio;
+        req.zombie.save((err)=>{
+            if(err){
+                next(err);
+                return;
+            }
+            req.flash("info","Perfil Actualizado");
+            res.redirect("/edit");
+        });
+    });
+   
+    function ensureAuthenticated(req, res, next){
+        if(req.isAuthenticated()){
+            next();
+        } else{
+            req.flash("info", "Necesitas iniciar sesion para poder ver esta seccion");
+            res.redirect("/login");
+        }
+    }
 module.exports = router;
 
     
