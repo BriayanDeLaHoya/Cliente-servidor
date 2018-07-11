@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    
 </head>
+
 <body>
     <div class="navbar navbar-default navbar-static-top" role = "navigation">
         <div class="container-fluid">
@@ -22,7 +24,15 @@
         </li>
         <li>
             <a href="/logout">Salir</a>
+        </li>
         <li>
+            <a> <%= currentZombie.rol()%></a>
+        </li>
+        <li>
+            <a href="/armas">Ingresar Arma</a>
+        </li>
+        <li>
+            <a href="/armas_list">Armas registradas</a>
         <% } else {%>  
         <li>
             <a href="/login">Entrar</a>
@@ -30,11 +40,7 @@
         <li>
             <a href="/signup">Registrarse</a>
         </li>
-        <li>
-            <a href="/armas">Ingresar Arma</a>
-        </li>
-        <li>
-            <a href="/armas_list">Armas registradas</a>
+        
         </li>
         <% } %>
         </ul>
