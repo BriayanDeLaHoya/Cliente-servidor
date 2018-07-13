@@ -55,12 +55,12 @@
             "action": "allow"
         },
         {
-            "resource": "/re-weapons",
+            "resource": "/armas",
             "methods": "*",
             "action": "allow"
         },
         {
-            "resource": "/weapons",
+            "resource": "/armas_list",
             "methods": "*",
             "action": "allow"
         }]

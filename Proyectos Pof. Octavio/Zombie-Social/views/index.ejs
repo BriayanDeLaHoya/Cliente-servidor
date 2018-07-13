@@ -1,11 +1,16 @@
 <% include _header %>
-<h1> Bienvenid@ a la guarida zombie </h1>
-<h2> Briayan De La Hoya Vázquez </h2>
+    <br>
+    <h1> Bienvenid@ a la guarida zombie </h1>
+    <h2> Briayan De La Hoya Vázquez </h2>
+    <div class="list-group"></div>
+<a class="list-group-item list-group-item-primary">
+    Usuarios
+</a>
 
 <% zombies.forEach((zombie)=> {%>
-    <div class="panel panel-default" id="container">
-        <div class="panel-heading" id="container">
-            <a href="/zombies/<%= zombie.username %>">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a href="/zombies/<%= zombie.username %>" class="list-group-item list-group-item-action">
                 <%= zombie.name() %>
             </a>
         </div>

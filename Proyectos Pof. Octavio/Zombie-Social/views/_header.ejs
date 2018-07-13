@@ -6,34 +6,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <style>
+        * {
+          margin: 0; 
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            padding: 30px; 
+            font-family: "Helvetica Neue", helvetica, arial;
+            background-image: url('https://images4.alphacoders.com/178/thumb-1920-17888.jpg');
+            background-size: 75%;
+        }
+        #container {
+            position: relative;
+            width: 100%;		
+        }
+        #container:after {
+            content: "";
+            display: block;
+            clear: both;
+            height: 0;
+        }
+        #menu {
+            position: relative;
+            float: left;
+            width: 100%;
+            padding: 0 20px;
+            border-radius: 3px;
+            box-shadow:#000000;
+        }
+        #menu, #menu ul {
+            list-style: none;
+        }
+        #menu > li {
+            float: left;
+            position: center;
+            border-right: 1px solid #ffff;
+            box-shadow: 1px 0 0 #ffff;
+            perspective: 1000px;
+            opacity: .4;
+            
+        }
+        #menu > li:first-child {
+            border-left: 1px solid #ffff;
+            box-shadow: -1px 0 0 #ffff, 1px 0 0 #ffff;
+        }
+        #menu a {
+            display: block;
+            position: relative;
+            z-index: 10;
+            padding: 13px 20px 13px 20px;
+            text-decoration: none;
+            color: #000000;
+            line-height: 1;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: -.05em;
+            background: transparent;		
+            text-shadow: 0 1px 1px #ffff;
+            transition: all .25s ease-in-out;
+        
+        }
+        #menu > li:hover > a {
+            background: #333;
+            color: #ffff;
+            text-shadow: none;
+        }
+        #menu li ul  {
+            position: absolute;
+            left: 0;
+            z-index: 1;
+            width: 200px;
+            padding: 0;
+            opacity: 0;
+            visibility: hidden;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            background: transparent;
+            overflow: hidden;
+            transform-origin: 50% 0%;
+        }
+        #menu li:hover ul {
+            
+            padding: 15px 0;
+            background: #000000;
+            opacity: 1;
+            visibility: visible;
+            box-shadow: 1px 1px 7px #000000;
+            animation-name: swingdown;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+        }
+        @keyframes swingdown {
+            0% {
+                opacity: .99999;
+                transform: rotateX(90deg);
+            }
+            30% {			
+                transform: rotateX(-20deg) rotateY(5deg);
+                animation-timing-function: ease-in-out;
+            }
+            65% {
+                transform: rotateX(20deg) rotateY(-3deg);
+                animation-timing-function: ease-in-out;
+            }
+            100% {
+                transform: rotateX(0);
+                animation-timing-function: ease-in-out;
+            }
+        }
+        #menu li li a {
+            padding-left: 15px;
+            font-weight: 400;
+            color:  #ffff;
+            text-shadow: none;
+            border-top: dotted 1px transparent;
+            border-bottom: dotted 1px transparent;
+            transition: all .15s linear;
+        }
+        #menu li li a:hover {
+            color: #333;
+            border-top: dotted 1px #ffff;
+            border-bottom: dotted 1px #ffff;
+            background: rgba(0,223,252,.02);
+        }
+       
+        
+    </style>
     
 </head>
 
 <body>
-    <div class="navbar navbar-default navbar-static-top" role = "navigation">
-        <div class="container-fluid">
+    <div id="container">
+        <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">Zombie Nest</a>
+        
     </div>
-        <ul class ="nav navbar-nav navbar-right">
+        <ul id="menu">
         <% if (currentZombie){ %>
+        <li>
+            <a href="/">Zombie Nest</a>
+        </li>
         <li>
             <a href="/edit">
             Hola, <%= currentZombie.name()%>
             </a>
         </li>
         <li>
-            <a href="/logout">Salir</a>
+                <a href="/armas">Ingresar Arma</a>
+            </li>
+        <li>
+            <a href="/armas_list">Armas registradas</a>
+        </li>
+        <li>
+             <a href="/logout">Salir</a>
         </li>
         <li>
             <a> <%= currentZombie.rol()%></a>
         </li>
         <li>
-            <a href="/armas">Ingresar Arma</a>
-        </li>
-        <li>
-            <a href="/armas_list">Armas registradas</a>
+            
         <% } else {%>  
+        <li>
+            <a href="/">Zombie Nest</a>
+        </li>
         <li>
             <a href="/login">Entrar</a>
         </li>
@@ -58,3 +195,4 @@
         </div>
     <% }) %>
     
+   
