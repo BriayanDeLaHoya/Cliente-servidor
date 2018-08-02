@@ -12,7 +12,7 @@
  var routes = require("./routes");
  var passportsetup = require("./passportsetup");
  var app = express();
-
+//algo nomas pa ver que rollo
  mongoose.connect("mongodb://Briayan:Mundialnegro@22@ds161391.mlab.com:61391/zombie_nest");
 
  passportsetup();
