@@ -1,4 +1,4 @@
- var express = require ("express");
+ var express = require("express");
  var mongoose = require("mongoose");
 
  var path = require("path");
@@ -17,28 +17,28 @@
 
  passportsetup();
 
- app.set("port",process.env.PORT || 3000);
+ app.set("port", process.env.PORT || 3000);
 
- app.set("views", path.resolve(__dirname,"views"));
-app.set("view engine","ejs");
+ app.set("views", path.resolve(__dirname, "views"));
+ app.set("view engine", "ejs");
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
-app.use(session({
-    secret:"HOLA ESTE ES MI PRIMER TRABAJO EN MONGODB",
-    resave:true,
-    saveUninitialized: true
-}));
+ app.use(bodyParser.urlencoded({ extended: false }));
+ app.use(cookieParser());
+ app.use(session({
+     secret: "HOLA ESTE ES MI PRIMER TRABAJO EN MONGODB",
+     resave: true,
+     saveUninitialized: true
+ }));
 
-app.use(flash());
+ app.use(flash());
 
-app.use(passport.initialize({
-    userProperty:"zombie"
-}));
-app.use(passport.session());
+ app.use(passport.initialize({
+     userProperty: "zombie"
+ }));
+ app.use(passport.session());
 
-app.use(routes);
+ app.use(routes);
 
-app.listen(app.get("port"),()=>{
-    console.log("La aplicacion inicio por el puerto " + app.get("port"));
-});
+ app.listen(app.get("port"), () => {
+     console.log("La aplicacion inicio por el puerto " + app.get("port"));
+ });
